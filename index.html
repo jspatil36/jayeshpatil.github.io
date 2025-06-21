@@ -1,7 +1,180 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jayesh Sanjay Patil | Senior Embedded Vehicle Platform Engineer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts – Inter Variable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-950 text-gray-100 leading-relaxed">
+    <!-- Navigation -->
+    <nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4 transition-all">
+      <a href="#hero" class="text-lg font-semibold tracking-tight">Jayesh S Patil</a>
+      <ul class="hidden md:flex gap-8 text-sm font-medium">
+        <li><a href="#about" class="hover:text-emerald-400">About</a></li>
+        <li><a href="#experience" class="hover:text-emerald-400">Experience</a></li>
+        <li><a href="#projects" class="hover:text-emerald-400">Projects</a></li>
+        <li><a href="#skills" class="hover:text-emerald-400">Skills</a></li>
+        <li><a href="#contact" class="hover:text-emerald-400">Contact</a></li>
+      </ul>
+      <div class="flex gap-4">
+        <a href="https://linkedin.com/in/jayesh-sanjay-patil" target="_blank" aria-label="LinkedIn" class="hover:text-emerald-400"><i data-feather="linkedin"></i></a>
+        <a href="https://github.com/" target="_blank" aria-label="GitHub" class="hover:text-emerald-400"><i data-feather="github"></i></a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-6">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Jayesh Sanjay Patil</h1>
+      <p class="text-lg md:text-2xl font-medium mb-6 text-gray-300">Senior Embedded Vehicle Platform Engineer | Automotive Systems & Software</p>
+      <p class="max-w-2xl text-sm md:text-base text-gray-400">I build and optimize foundational software for next‑generation vehicles, specializing in bootloaders, SoC bring‑up, and performance tuning.</p>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 px-6 md:px-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">About</h2>
+      <p class="mb-4">I am currently a Senior Embedded Vehicle Platform Engineer at Magna Electronics, where I craft reliable low‑level software for ADAS domain controllers. My expertise spans embedded C/C++, Linux/QNX BSPs, and real‑time system architecture.</p>
+      <p class="mb-4">Over the last 6+ years, I have:
+        <br>• Developed custom U‑Boot features and optimized cold‑boot time by 28%.
+        <br>• Led bring‑up of Qualcomm SA8295 and Renesas R‑Car platforms, enabling multi‑sensor ADAS stacks.
+        <br>• Implemented robust CAN, LIN, and Automotive Ethernet communication layers across ECUs.
+      </p>
+      <p>I’m passionate about autonomous driving and vehicle electrification and am eager to tackle complex challenges that merge embedded performance with functional safety.</p>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-24 bg-gray-900/40 px-6 md:px-12">
+      <h2 class="text-3xl font-bold mb-12 text-center">Experience</h2>
+      <div class="relative border-l border-gray-700 max-w-2xl mx-auto">
+        <!-- Magna -->
+        <div class="mb-12 ml-6">
+          <span class="absolute -left-3 top-1.5 w-3 h-3 bg-emerald-400 rounded-full"></span>
+          <h3 class="text-xl font-semibold">Magna Electronics – Farmington Hills, MI</h3>
+          <p class="text-sm text-gray-400 mb-2">Senior Embedded Vehicle Platform Engineer | Nov 2021 – Present</p>
+          <ul class="list-disc ml-4 space-y-1 text-sm text-gray-300">
+            <li>Optimized Gen 6/7 ADAS boot time by 28% via U‑Boot enhancements & parallel init.</li>
+            <li>Brought up Qualcomm SA8295 & Renesas R‑Car SoCs; enabled GMSL2 camera chains.</li>
+            <li>Automated BSP builds with Yocto, Python, and Jenkins; cut release cycle by 35%.</li>
+            <li>Debugged hard faults using JTAG/Trace32, reducing field issues by 40%.</li>
+          </ul>
+        </div>
+        <!-- U‑M -->
+        <div class="mb-12 ml-6">
+          <span class="absolute -left-3 top-1.5 w-3 h-3 bg-emerald-400 rounded-full"></span>
+          <h3 class="text-xl font-semibold">University of Michigan – Dearborn, MI</h3>
+          <p class="text-sm text-gray-400 mb-2">Research Assistant | Jan 2020 – May 2021</p>
+          <ul class="list-disc ml-4 space-y-1 text-sm text-gray-300">
+            <li>Developed real‑time RTK‑based position & heading system for autonomous golf‑car.</li>
+            <li>Fused GPS & IMU in ROS (C++) achieving &lt;10 cm positional accuracy at 50 Hz.</li>
+            <li>Published findings in IEEE ITSC 2021; open‑sourced codebase on GitHub.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-24 px-6 md:px-12 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-12 text-center">Projects</h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        <!-- Project 1 -->
+        <article class="bg-gray-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-lg font-semibold mb-2">RTK‑Based Position & Heading</h3>
+          <p class="text-sm text-gray-300 mb-4">Designed a sensor‑fusion pipeline in ROS that combines RTK‑GPS and MEMS‑IMU to deliver sub‑10 cm localization for autonomous vehicles.</p>
+          <p class="text-xs text-gray-400">C++ · ROS · EKF · RTK‑Lib · Linux</p>
+        </article>
+        <!-- Project 2 -->
+        <article class="bg-gray-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-lg font-semibold mb-2">Bootloader Fast‑Boot Optimization</h3>
+          <p class="text-sm text-gray-300 mb-4">Re‑architected U‑Boot init sequence and enabled TrustZone SPL to cut cold‑boot from 6.2 s to 4.5 s on Renesas R‑Car.</p>
+          <p class="text-xs text-gray-400">C · U‑Boot · ARM Trusted Firmware · JTAG</p>
+        </article>
+        <!-- Project 3 -->
+        <article class="bg-gray-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-lg font-semibold mb-2">DDS Sensor Fusion Pipeline</h3>
+          <p class="text-sm text-gray-300 mb-4">Implemented an adaptive AUTOSAR DDS layer on Raspberry Pi, reducing sensor fusion delay by 35%.</p>
+          <p class="text-xs text-gray-400">C++ · DDS · AUTOSAR · Raspberry Pi</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-24 bg-gray-900/40 px-6 md:px-12">
+      <h2 class="text-3xl font-bold mb-12 text-center">Skills</h2>
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto text-sm text-gray-300">
+        <div>
+          <h3 class="font-semibold text-gray-100 mb-2">Programming</h3>
+          <p>C, C++, Python, Shell Script</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-100 mb-2">Operating Systems</h3>
+          <p>QNX, Linux, RTOS, Android</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-100 mb-2">Hardware / SoCs</h3>
+          <p>Qualcomm Snapdragon (SA8155, SA8295), Renesas R‑Car, ARM, JTAG/Trace32</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-100 mb-2">Automotive</h3>
+          <p>CAN, LIN, Ethernet, U‑Boot, Yocto, AUTOSAR, ISO 26262</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-100 mb-2">Tools & Tech</h3>
+          <p>Git, Jenkins, Jira, Docker, MATLAB/Simulink, ROS</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 px-6 md:px-12 max-w-xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+      <p class="mb-8 text-gray-300">I’m always open to discussing new opportunities in automotive tech. Feel free to reach out!</p>
+      <a href="mailto:jspatil36@gmail.com" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-semibold px-8 py-3 rounded-full transition">Email Me</a>
+      <div class="flex justify-center gap-6 mt-8 text-2xl">
+        <a href="https://linkedin.com/in/jayesh-sanjay-patil" target="_blank" aria-label="LinkedIn" class="hover:text-emerald-400"><i data-feather="linkedin"></i></a>
+        <a href="https://github.com/" target="_blank" aria-label="GitHub" class="hover:text-emerald-400"><i data-feather="github"></i></a>
+        <a href="/Jayesh_Patil_Resume.pdf" class="hover:text-emerald-400" aria-label="Resume"><i data-feather="file-text"></i></a>
+      </div>
+    </section>
+
+    <!-- Scroll‑to‑Top Button -->
+    <button id="scrollTopBtn" class="hidden fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-gray-900 p-3 rounded-full shadow-lg transition"><i data-feather="arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script>
+      (function () {
+        const navbar = document.querySelector("nav");
+        const scrollBtn = document.getElementById("scrollTopBtn");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 20) {
+            navbar.classList.add("backdrop-blur","bg-gray-900\/70","shadow-lg");
+            scrollBtn.classList.remove("hidden");
+          } else {
+            navbar.classList.remove("backdrop-blur","bg-gray-900\/70","shadow-lg");
+            scrollBtn.classList.add("hidden");
+          }
+        });
+
+        scrollBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+        // Feather icons
+        feather.replace();
+      })();
+    </script>
+  </body>
 </html>
