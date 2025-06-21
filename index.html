@@ -8,281 +8,165 @@
     <!-- ▸ Google Fonts -------------------------------------------------- -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- ▸ Tailwind CSS -------------------------------------------------- -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              mono: ['JetBrains Mono', 'monospace'],
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              bg: '#1b1c22',
-              card: '#24252d',
-              accent: {
-                DEFAULT: '#a4b8ff',
-                hover: '#ccff00',
-              },
-            },
-            boxShadow: {
-              glow: '0 0 10px rgba(204,255,0,.4)',
-            },
-            keyframes: {
-              fadeUp: {
-                '0%': { opacity: 0, transform: 'translateY(40px)' },
-                '100%': { opacity: 1, transform: 'translateY(0)' },
-              },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-6px)' },
-              },
-            },
-            animation: {
-              fadeUp: 'fadeUp .6s ease-out forwards',
-              float: 'float 4s ease-in-out infinite',
-            },
-          },
-        },
-      }
-    </script>
-
-    <!-- ▸ Alpine.js (tiny JS for interactivity) ------------------------- -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <!-- ▸ Feather Icons ------------------------------------------------- -->
-    <script defer src="https://unpkg.com/feather-icons"></script>
 
     <style>
-      /* subtle starfield background */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
-        background-size: 3px 3px;
-        pointer-events: none;
-        z-index: -1;
-        animation: twinkle 6s linear infinite;
+      body {
+        font-family: 'Inter', sans-serif;
       }
-      @keyframes twinkle { 50% { opacity: .4; } }
     </style>
   </head>
-
-  <body class="font-sans bg-bg text-slate-100 selection:bg-accent hover:selection:text-bg">
-    <!-- 🔮 Hero --------------------------------------------------------- -->
-    <header class="relative h-screen flex flex-col justify-between overflow-hidden">
-      <nav id="navbarEl" class="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-bg/70 border-b border-slate-700">
-        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-          <ul class="flex gap-8 uppercase text-sm font-mono tracking-wider">
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#experience" class="nav-link">Work</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#blogs" class="nav-link">Blogs</a></li>
-          </ul>
-          <div class="flex gap-4 text-lg">
-            <a href="https://github.com/jayeshpatil" target="_blank" aria-label="GitHub"><i data-feather="github"></i></a>
-            <a href="https://linkedin.com/in/jayesh-sanjay-patil" target="_blank" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
-            <a href="mailto:jspatil36@gmail.com" aria-label="Email"><i data-feather="mail"></i></a>
-          </div>
-        </div>
+  <body class="bg-white text-gray-800">
+    <!-- ▸ Navbar ------------------------------------------------------- -->
+    <header class="fixed top-0 w-full bg-white/90 backdrop-blur border-b border-gray-100 z-50">
+      <nav class="max-w-4xl mx-auto flex items-center justify-between p-4">
+        <a href="#hero" class="text-lg font-semibold">Jayesh Patil</a>
+        <ul class="hidden sm:flex space-x-6 text-sm">
+          <li><a class="hover:text-blue-600" href="#about">About</a></li>
+          <li><a class="hover:text-blue-600" href="#experience">Experience</a></li>
+          <li><a class="hover:text-blue-600" href="#projects">Projects</a></li>
+          <li><a class="hover:text-blue-600" href="#skills">Skills</a></li>
+          <li><a class="hover:text-blue-600" href="#education">Education</a></li>
+          <li><a class="hover:text-blue-600" href="#web-posts">Web Posts</a></li>
+        </ul>
       </nav>
-
-      <div class="mt-32 flex-1 flex flex-col items-center justify-center text-center px-6" x-data>
-        <h1 class="text-5xl md:text-7xl font-bold font-mono animate-fadeUp">
-          Jayesh Sanjay Patil
-        </h1>
-        <p class="mt-6 text-xl md:text-2xl text-slate-300 animate-fadeUp" style="animation-delay:.2s">
-          Senior Embedded Vehicle Platform Engineer<br class="hidden md:block" />Specializing in bootloaders, SoC bring‑up & performance tuning
-        </p>
-        <a href="#contact" class="mt-10 inline-block px-8 py-3 rounded-full bg-accent text-bg font-semibold shadow-glow hover:shadow-lg transition">Get in touch</a>
-      </div>
-
-      <!-- parallax glow orb -->
-      <div class="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent/20 rounded-full blur-3xl animate-float"></div>
     </header>
 
-    <!-- 📝 About -------------------------------------------------------- -->
-    <section id="about" class="max-w-4xl mx-auto px-6 py-24">
-      <h2 class="section-title">About</h2>
-      <p class="mt-6 leading-relaxed text-lg" data-animate>
-        I’m a systems tinkerer who loves squeezing every microsecond out of automotive hardware. From crafting secure U‑Boot chains on Renesas R‑Car to slashing boot time on Qualcomm Snapdragon ADAS SoCs, I’ve turned board‑bring‑up and low‑level diagnostics into an art form.
+    <!-- ▸ Hero --------------------------------------------------------- -->
+    <section id="hero" class="min-h-screen flex items-center justify-center text-center px-6">
+      <div>
+        <h1 class="text-4xl sm:text-6xl font-bold mb-4">Jayesh Sanjay Patil</h1>
+        <p class="text-lg sm:text-xl text-gray-600">
+          Senior ADAS Embedded Software Engineer @ Ford Motor Company
+        </p>
+      </div>
+    </section>
+
+    <!-- ▸ About -------------------------------------------------------- -->
+    <section id="about" class="max-w-3xl mx-auto py-16 px-6">
+      <h2 class="text-2xl font-semibold mb-4">About</h2>
+      <p>
+        Embedded systems specialist with 6+ years’ experience delivering
+        safety‑critical software for next‑generation vehicle platforms. Adept at
+        Classic & Adaptive AUTOSAR, ISO 26262, and high‑performance C/C++ on
+        Renesas, Infineon, and ARM MCU/SoCs.
       </p>
-      <p class="mt-4 leading-relaxed text-lg" data-animate>
-        After architecting Gen‑7 ADAS platforms at Magna Electronics and completing an M.S. in Automotive Systems Engineering (U Michigan), I’m now focused on solving the next wave of challenges in autonomous driving and vehicle electrification.
+    </section>
+
+    <!-- ▸ Experience --------------------------------------------------- -->
+    <section id="experience" class="bg-gray-50 py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-8">Experience</h2>
+        <div class="space-y-8">
+          <div>
+            <h3 class="font-semibold">Senior ADAS Embedded Software Engineer — Ford Motor Company</h3>
+            <span class="text-sm text-gray-500">Oct 2024 – Present</span>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+              <li>Lead 3‑member team developing Adaptive & Classic AUTOSAR components for ADAS SoCs.</li>
+              <li>Architected camera view pipeline, cutting latency 21%.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold">Embedded Platform Engineer — Ford Motor Company</h3>
+            <span class="text-sm text-gray-500">Jul 2023 – Oct 2024</span>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+              <li>Delivered OTA‑ready diagnostics stack integrated with DoIP & secure boot.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold">Embedded System Engineer — HELLA Electronics</h3>
+            <span class="text-sm text-gray-500">Jan 2022 – Apr 2022</span>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+              <li>Modeled charging‑domain architecture in MagicDraw/SysML and authored ICDs for CAN & SOA.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold">Body Controls Engineer — FSAE Electric</h3>
+            <span class="text-sm text-gray-500">Feb 2021 – Oct 2021</span>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+              <li>Designed telemetry‑over‑CAN system; validated torque‑vectoring controller in MATLAB/Simulink.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold">Firmware Intern — Emdet & Futuring Group</h3>
+            <span class="text-sm text-gray-500">Jul 2018 – Mar 2019</span>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+              <li>Developed SPI/I<sup>2</sup>C drivers on PIC16/32 for automotive sensors.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ Projects ----------------------------------------------------- -->
+    <section id="projects" class="max-w-3xl mx-auto py-16 px-6">
+      <h2 class="text-2xl font-semibold mb-8">Projects</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
+          <h3 class="font-semibold">OTA Diagnostics Framework</h3>
+          <p class="text-sm text-gray-600">
+            Simulated multi‑ECU UDS stack with DoIP & secure boot on Raspberry Pi.
+          </p>
+        </article>
+        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
+          <h3 class="font-semibold">Functional‑Safety Modeling</h3>
+          <p class="text-sm text-gray-600">
+            ISO 26262 ASIL decomposition & fault‑injection for Forward Collision Warning.
+          </p>
+        </article>
+        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
+          <h3 class="font-semibold">DDS Sensor‑Fusion Pipeline</h3>
+          <p class="text-sm text-gray-600">
+            C++ QoS‑tuned DDS layer reducing perception latency by 35%.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ▸ Skills ------------------------------------------------------- -->
+    <section id="skills" class="bg-gray-50 py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-4">Skills</h2>
+        <ul class="list-disc list-inside space-y-1 text-gray-700">
+          <li>C, Modern C++20, Python</li>
+          <li>Classic & Adaptive AUTOSAR, SOME/IP, DDS</li>
+          <li>Protocols: CAN, LIN, FlexRay, Ethernet (TSN)</li>
+          <li>Standards: ISO 26262, ASPICE, SOTIF</li>
+          <li>Tools: Git/Bitbucket, MagicDraw, Vector DaVinci, Lauterbach, IC5000</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ▸ Education ---------------------------------------------------- -->
+    <section id="education" class="max-w-3xl mx-auto py-16 px-6">
+      <h2 class="text-2xl font-semibold mb-4">Education</h2>
+      <p class="text-gray-700">
+        <strong>Master of Science, Automotive Systems Engineering</strong><br />
+        University of Michigan – Dearborn, 2023
       </p>
     </section>
 
-    <!-- 💼 Experience --------------------------------------------------- -->
-    <section id="experience" class="bg-card/50 py-24">
-      <div class="max-w-4xl mx-auto px-6">
-        <h2 class="section-title">Experience</h2>
-        <!-- vertical timeline -->
-        <ol class="relative border-l border-accent mt-10 space-y-12">
-          <li data-animate>
-            <span class="timeline-dot"></span>
-            <div class="pl-6">
-              <h3 class="font-semibold text-lg">Magna Electronics – Farmington Hills, MI <span class="text-slate-400 font-normal">| Nov 2021 – Present</span></h3>
-              <p class="mt-2 font-mono text-accent">Senior Embedded Vehicle Platform Engineer</p>
-              <ul class="list-disc pl-6 mt-3 space-y-1 text-slate-300 text-sm leading-[1.6]">
-                <li>Optimized U‑Boot bootloader, shaving <strong>460 ms</strong> off cold‑boot on Gen‑7 ADAS SoC.</li>
-                <li>Led bring‑up of Snapdragon SA8295 board; deployed Yocto‑based Linux with JTAG/Trace32 debug.</li>
-                <li>Automated factory‑floor flashing via Python + CAN, reducing manual effort by 35%.</li>
-              </ul>
-            </div>
-          </li>
-          <li data-animate>
-            <span class="timeline-dot"></span>
-            <div class="pl-6">
-              <h3 class="font-semibold text-lg">University of Michigan – Dearborn, MI <span class="text-slate-400 font-normal">| Jan 2020 – Oct 2021</span></h3>
-              <p class="mt-2 font-mono text-accent">Research Assistant</p>
-              <ul class="list-disc pl-6 mt-3 space-y-1 text-slate-300 text-sm leading-[1.6]">
-                <li>Built RTK‑based position & heading system (C++/ROS) fusing GPS & IMU for <strong>±2 cm</strong> accuracy.</li>
-                <li>Published findings at IEEE ITSC 2021; open‑sourced calibration toolkit (400+ GitHub stars).</li>
-              </ul>
-            </div>
-          </li>
-        </ol>
+    <!-- ▸ Web Posts ---------------------------------------------------- -->
+    <section id="web-posts" class="bg-gray-50 py-16 px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-4">Web Posts</h2>
+        <p class="text-gray-500 italic">Coming soon…</p>
       </div>
     </section>
 
-    <!-- 🛠 Skills ------------------------------------------------------- -->
-    <section id="skills" class="max-w-4xl mx-auto px-6 py-24">
-      <h2 class="section-title">Skills</h2>
-      <div class="grid md:grid-cols-2 gap-10 mt-10" data-animate>
-        <div>
-          <h3 class="skill-heading">Programming Languages</h3>
-          <p class="skill-list">C, C++, Python, Bash</p>
-          <h3 class="skill-heading mt-6">Operating Systems</h3>
-          <p class="skill-list">Linux, QNX, RTOS, Android</p>
-          <h3 class="skill-heading mt-6">Hardware & SoCs</h3>
-          <p class="skill-list">Snapdragon SA8155/SA8295, Renesas R‑Car, ARM Cortex‑A/R, JTAG/Trace32</p>
-        </div>
-        <div>
-          <h3 class="skill-heading">Automotive</h3>
-          <p class="skill-list">U‑Boot, Bootloaders, Yocto Project, CAN, LIN, Ethernet, AUTOSAR, ISO 26262</p>
-          <h3 class="skill-heading mt-6">Tools & Tech</h3>
-          <p class="skill-list">Git, Jenkins, Jira, Docker, MATLAB/Simulink, ROS</p>
-        </div>
-      </div>
-    </section>
+    <!-- ▸ Footer ------------------------------------------------------- -->
+    <footer class="py-8 text-center text-sm text-gray-500">
+      © <span id="year"></span> Jayesh Sanjay Patil — All rights reserved
+    </footer>
 
-    <!-- 🚀 Projects ----------------------------------------------------- -->
-    <section id="projects" class="bg-card/50 py-24">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="section-title">Projects</h2>
-        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-10" id="projectGrid">
-          <!-- project cards injected by JS for brevity -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ✍️ Blogs -------------------------------------------------------- -->
-    <section id="blogs" class="max-w-4xl mx-auto px-6 py-24">
-      <h2 class="section-title">Blogs</h2>
-      <div class="mt-10 space-y-8" data-animate>
-        <article>
-          <a href="#" class="blog-link text-lime-400">Next.js just blew my mind…</a>
-          <p class="blog-meta">26 Nov 2024 · 4 min read</p>
-        </article>
-        <article>
-          <a href="#" class="blog-link text-orange-400">Cool Kubernetes</a>
-          <p class="blog-meta">20 Nov 2024 · 8 min read</p>
-        </article>
-        <article>
-          <a href="#" class="blog-link text-sky-400">Ping‑Pong ball tracking and projected distance calculation system for data modeling</a>
-          <p class="blog-meta">28 Oct 2024 · 5 min read</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- 📮 Contact ------------------------------------------------------ -->
-    <section id="contact" class="bg-card py-24">
-      <div class="max-w-2xl mx-auto text-center px-6" data-animate>
-        <h2 class="section-title">Get in touch</h2>
-        <p class="mt-6 text-lg text-slate-300">I’m always excited to discuss new ideas in autonomous driving & electrification. Drop an email and let’s talk!</p>
-        <a href="mailto:jspatil36@gmail.com" class="mt-8 inline-block px-10 py-3 rounded-full bg-accent text-bg font-semibold shadow-glow hover:shadow-lg transition">Email Me</a>
-      </div>
-    </section>
-
-    <!-- ▸ Templates ----------------------------------------------------- -->
-    <template id="projectCardTmpl">
-      <div class="group rounded-3xl border border-slate-700/50 backdrop-blur bg-card/60 p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-glow transition-transform duration-200" data-animate>
-        <div class="space-y-4">
-          <div class="w-6 h-6" data-icon></div>
-          <h3 class="font-medium text-lg text-slate-100" data-title></h3>
-          <p class="text-accent font-mono text-sm" data-link></p>
-        </div>
-        <div class="flex items-end justify-between mt-6">
-          <span class="inline-block px-3 py-[2px] border border-red-500/60 rounded-full text-xs text-red-300 font-mono">Video</span>
-          <time class="text-[13px] text-accent/80 font-mono" data-date></time>
-        </div>
-      </div>
-    </template>
-
-    <!-- ▸ Scripts ------------------------------------------------------- -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        feather.replace({ 'stroke-width': 1.4 });
-
-        // Scroll‑spy nav
-        const sections = [...document.querySelectorAll('section[id]')];
-        const navLinks = [...document.querySelectorAll('.nav-link')];
-        const spy = () => {
-          const pos = window.scrollY + 200;
-          sections.forEach(sec => {
-            if (pos > sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
-              navLinks.forEach(a => a.classList.remove('text-accent'));
-              const active = navLinks.find(a => a.getAttribute('href') === `#${sec.id}`);
-              active?.classList.add('text-accent');
-            }
-          });
-        };
-        window.addEventListener('scroll', spy);
-        spy();
-
-        // Reveal on scroll
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('opacity-100', 'translate-y-0');
-          });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('[data-animate]').forEach(el => {
-          el.classList.add('opacity-0', 'translate-y-10', 'transition');
-          observer.observe(el);
-        });
-
-        // Inject project cards
-        const projects = [
-          { icon: 'cpu', title: 'RTK Position & Heading System', link: 'github.com/jayesh/rtk‑fusion', date: 'Jan 2025' },
-          { icon: 'hard-drive', title: 'Gen‑7 U‑Boot Fast‑Boot', link: 'Internal Magna', date: 'Ongoing 2024' },
-          { icon: 'navigation', title: 'DDS Sensor‑Fusion Pipeline', link: 'github.com/jayesh/dds‑fusion', date: 'Jul 2024' },
-        ];
-        const grid = document.getElementById('projectGrid');
-        const tmpl = document.getElementById('projectCardTmpl').content;
-        projects.forEach(p => {
-          const node = tmpl.cloneNode(true);
-          node.querySelector('[data-icon]').innerHTML = feather.icons[p.icon].toSvg({ class: 'w-6 h-6 text-accent' });
-          node.querySelector('[data-title]').textContent = p.title;
-          node.querySelector('[data-link]').textContent = p.link;
-          node.querySelector('[data-date]').textContent = p.date;
-          grid.appendChild(node);
-        });
-      });
+      document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-
-    <!-- ▸ Minor styling helpers -->
-    <style>
-      .section-title { @apply font-mono text-3xl font-semibold text-accent; }
-      .skill-heading { @apply font-mono text-accent; }
-      .skill-list { @apply text-slate-300 leading-relaxed; }
-      .timeline-dot { @apply absolute -left-3 top-2 w-3 h-3 bg-accent rounded-full; }
-      .blog-link { @apply text-xl font-mono underline underline-offset-4 decoration-2 hover:decoration-accent hover:decoration-4 transition; }
-      .blog-meta { @apply text-sm text-slate-400 mt-1; }
-    </style>
   </body>
 </html>
