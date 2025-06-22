@@ -40,17 +40,10 @@
         background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
         pointer-events: none;
         transform: translate(-50%, -50%);
-        transition: left 0.1s ease-out, top 0.1s ease-out;
+        transition: left 0.1s ease-out, top 0.1s ease-out, opacity 0.5s ease-in-out; /* Added opacity transition */
         /* Place spotlight above particles but below content */
         z-index: 1;
-        opacity: 0;
-      }
-
-      /* Make spotlight visible on non-touch devices (desktops) */
-      @media (pointer: fine) {
-        .spotlight {
-          opacity: 1;
-        }
+        opacity: 0; /* Start as invisible */
       }
       
       /* Ensure main content is above all background effects */
@@ -275,20 +268,20 @@
       particlesJS('particles-js', {
         "particles": {
           "number": {
-            "value": 120, // Increased particle count
+            "value": 120,
             "density": {
               "enable": true,
               "value_area": 800
             }
           },
           "color": {
-            "value": "#ffffff" // Brighter particle color
+            "value": "#ffffff"
           },
           "shape": {
             "type": "circle"
           },
           "opacity": {
-            "value": 0.6, // Increased opacity
+            "value": 0.6,
             "random": true
           },
           "size": {
@@ -296,7 +289,7 @@
             "random": true
           },
           "line_linked": {
-            "enable": false // Lines are disabled for a cleaner "repulse" effect
+            "enable": false
           },
           "move": {
             "enable": true,
@@ -313,17 +306,26 @@
           "events": {
             "onhover": {
               "enable": true,
-              "mode": "repulse" // Switched to repulse mode
+              "mode": "repulse" 
             },
             "onclick": {
-              "enable": false
+              "enable": true,
+              "mode": "bubble" 
             },
             "resize": true
           },
           "modes": {
             "repulse": {
-              "distance": 100, // How far the particles are pushed
+              "distance": 100,
               "duration": 0.4
+            },
+            "bubble": {
+              "distance": 200,    
+              "size": 8,          
+              "duration": 0.4     
+            },
+            "push": {
+                "particles_nb": 4 
             }
           }
         },
@@ -333,32 +335,63 @@
       // Set current year in footer
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Spotlight cursor effect for both mouse and touch
+      // Spotlight cursor effect with fade-out timer
       const spotlight = document.getElementById('spotlight');
-      
+      let spotlightTimer;
+
       const moveSpotlight = (x, y) => {
+        // Make spotlight visible and move it
+        spotlight.style.opacity = '1';
         window.requestAnimationFrame(() => {
             spotlight.style.left = `${x}px`;
             spotlight.style.top = `${y}px`;
         });
+
+        // Clear any existing timer
+        clearTimeout(spotlightTimer);
+
+        // Set a new timer to hide the spotlight after a delay
+        spotlightTimer = setTimeout(() => {
+            spotlight.style.opacity = '0';
+        }, 3000); // 3-second delay for desktop
       };
       
+      const touchMoveSpotlight = (x, y) => {
+        // Make spotlight visible and move it
+        spotlight.style.opacity = '1';
+         window.requestAnimationFrame(() => {
+            spotlight.style.left = `${x}px`;
+            spotlight.style.top = `${y}px`;
+        });
+        clearTimeout(spotlightTimer);
+      };
+
+      // Desktop event listener
       document.addEventListener('mousemove', (e) => {
         moveSpotlight(e.clientX, e.clientY);
       });
       
+      // Touch event listeners
       document.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
-          moveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
+          touchMoveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
         }
       });
       
       document.addEventListener('touchstart', (e) => {
-        spotlight.style.opacity = '1';
         if (e.touches.length > 0) {
-            moveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
+            touchMoveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
         }
       });
+      
+      document.addEventListener('touchend', () => {
+        // When touch ends, start a shorter timer to fade out
+        clearTimeout(spotlightTimer);
+        spotlightTimer = setTimeout(() => {
+            spotlight.style.opacity = '0';
+        }, 2000); // 2-second delay for mobile
+      });
+
 
       // Scroll-reveal animations
       const observer = new IntersectionObserver((entries) => {
@@ -377,24 +410,27 @@
 
       // Project card 3D tilt effect (desktop only)
       const projectCards = document.querySelectorAll('.project-card');
-      projectCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const { width, height } = rect;
-          const rotateX = (y / height - 0.5) * -15;
-          const rotateY = (x / width - 0.5) * 15;
+      // Check if it's not a touch device before adding tilt effect
+      if (!('ontouchstart' in window)) {
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const { width, height } = rect;
+            const rotateX = (y / height - 0.5) * -15;
+            const rotateY = (x / width - 0.5) * 15;
 
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-          card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
-        });
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
+            });
 
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-          card.style.boxShadow = 'none';
+            card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            card.style.boxShadow = 'none';
+            });
         });
-      });
+      }
     </script>
   </body>
 </html>
