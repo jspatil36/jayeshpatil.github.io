@@ -16,17 +16,22 @@
     <style>
       body {
         font-family: 'Inter', sans-serif;
-        /* A darker slate for a more premium feel */
         background-color: #0A0A0A; 
-        /* Add a subtle background grid pattern */
-        background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        background-size: 30px 30px;
       }
       
-      /* Corrected spotlight cursor effect */
+      /* Particles.js container for the live background */
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+      
+      /* Spotlight cursor effect */
       .spotlight {
         position: fixed;
-        /* Set initial position */
         left: 0; 
         top: 0;
         width: 400px;
@@ -34,17 +39,24 @@
         border-radius: 9999px;
         background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
         pointer-events: none;
-        /* This transform now correctly centers the element based on its left/top position */
         transform: translate(-50%, -50%);
-        /* Animate the left/top properties for smooth movement */
         transition: left 0.1s ease-out, top 0.1s ease-out;
-        z-index: 0;
+        /* Place spotlight above particles but below content */
+        z-index: 1;
+        opacity: 0;
+      }
+
+      /* Make spotlight visible on non-touch devices (desktops) */
+      @media (pointer: fine) {
+        .spotlight {
+          opacity: 1;
+        }
       }
       
-      /* Ensure content is above the spotlight */
+      /* Ensure main content is above all background effects */
       .content-wrapper {
         position: relative;
-        z-index: 1;
+        z-index: 2;
       }
 
       /* Timeline vertical line */
@@ -80,6 +92,9 @@
     </style>
   </head>
   <body class="text-slate-400 overflow-x-hidden">
+
+    <!-- The live background container -->
+    <div id="particles-js"></div>
 
     <!-- The spotlight element -->
     <div id="spotlight" class="spotlight"></div>
@@ -120,6 +135,7 @@
           </div>
         </section>
 
+        <!-- Other sections remain the same -->
         <!-- ▸ About -->
         <section id="about" class="py-32 reveal-on-scroll">
           <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-8">About</h2>
@@ -251,19 +267,97 @@
         <p>© <span id="year"></span> Jayesh Sanjay Patil. All rights reserved.</p>
       </footer>
     </div>
-
+    
+    <!-- Scripts for animations -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
+      // Initialize Particles.js with updated config
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 120, // Increased particle count
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff" // Brighter particle color
+          },
+          "shape": {
+            "type": "circle"
+          },
+          "opacity": {
+            "value": 0.6, // Increased opacity
+            "random": true
+          },
+          "size": {
+            "value": 2,
+            "random": true
+          },
+          "line_linked": {
+            "enable": false // Lines are disabled for a cleaner "repulse" effect
+          },
+          "move": {
+            "enable": true,
+            "speed": 1.5,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "repulse" // Switched to repulse mode
+            },
+            "onclick": {
+              "enable": false
+            },
+            "resize": true
+          },
+          "modes": {
+            "repulse": {
+              "distance": 100, // How far the particles are pushed
+              "duration": 0.4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+
       // Set current year in footer
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Spotlight cursor effect
+      // Spotlight cursor effect for both mouse and touch
       const spotlight = document.getElementById('spotlight');
-      document.addEventListener('mousemove', (e) => {
+      
+      const moveSpotlight = (x, y) => {
         window.requestAnimationFrame(() => {
-            // By updating left and top, we let the CSS transform handle the centering
-            spotlight.style.left = `${e.clientX}px`;
-            spotlight.style.top = `${e.clientY}px`;
+            spotlight.style.left = `${x}px`;
+            spotlight.style.top = `${y}px`;
         });
+      };
+      
+      document.addEventListener('mousemove', (e) => {
+        moveSpotlight(e.clientX, e.clientY);
+      });
+      
+      document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          moveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      });
+      
+      document.addEventListener('touchstart', (e) => {
+        spotlight.style.opacity = '1';
+        if (e.touches.length > 0) {
+            moveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
+        }
       });
 
       // Scroll-reveal animations
@@ -281,7 +375,7 @@
       elementsToReveal.forEach(el => observer.observe(el));
 
 
-      // Project card 3D tilt effect
+      // Project card 3D tilt effect (desktop only)
       const projectCards = document.querySelectorAll('.project-card');
       projectCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -289,8 +383,8 @@
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
           const { width, height } = rect;
-          const rotateX = (y / height - 0.5) * -15; // Max rotation 7.5 deg
-          const rotateY = (x / width - 0.5) * 15;   // Max rotation 7.5 deg
+          const rotateX = (y / height - 0.5) * -15;
+          const rotateY = (x / width - 0.5) * 15;
 
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
           card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
@@ -301,7 +395,6 @@
           card.style.boxShadow = 'none';
         });
       });
-
     </script>
   </body>
 </html>
