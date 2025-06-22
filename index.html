@@ -3,170 +3,232 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jayesh Sanjay Patil | Embedded Vehicle Platform Engineer</title>
+    <title>Jayesh Sanjay Patil | Senior Embedded Platform Engineer</title>
 
-    <!-- ▸ Google Fonts -------------------------------------------------- -->
+    <!-- ▸ Google Fonts -------------------------------------------------- -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- ▸ Tailwind CSS -------------------------------------------------- -->
+    <!-- ▸ Tailwind CSS -------------------------------------------------- -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
       body {
         font-family: 'Inter', sans-serif;
+        background-color: #0F172A; /* slate-900 */
+      }
+      /* Custom glowing cursor effect */
+      .cursor-glow {
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        border-radius: 9999px;
+        background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out;
+        z-index: 0;
+      }
+      /* Ensure content is above the glow */
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+      /* Timeline vertical line */
+      .timeline-container::before {
+        content: '';
+        position: absolute;
+        left: 17px; /* Adjust to center on the dot */
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #1e293b; /* slate-800 */
+        transform: translateX(-50%);
       }
     </style>
   </head>
-  <body class="bg-white text-gray-800">
-    <!-- ▸ Navbar ------------------------------------------------------- -->
-    <header class="fixed top-0 w-full bg-white/90 backdrop-blur border-b border-gray-100 z-50">
-      <nav class="max-w-4xl mx-auto flex items-center justify-between p-4">
-        <a href="#hero" class="text-lg font-semibold">Jayesh Patil</a>
-        <ul class="hidden sm:flex space-x-6 text-sm">
-          <li><a class="hover:text-blue-600" href="#about">About</a></li>
-          <li><a class="hover:text-blue-600" href="#experience">Experience</a></li>
-          <li><a class="hover:text-blue-600" href="#projects">Projects</a></li>
-          <li><a class="hover:text-blue-600" href="#skills">Skills</a></li>
-          <li><a class="hover:text-blue-600" href="#education">Education</a></li>
-          <li><a class="hover:text-blue-600" href="#web-posts">Web Posts</a></li>
-        </ul>
-      </nav>
-    </header>
+  <body class="text-slate-300 overflow-x-hidden">
 
-    <!-- ▸ Hero --------------------------------------------------------- -->
-    <section id="hero" class="min-h-screen flex items-center justify-center text-center px-6">
-      <div>
-        <h1 class="text-4xl sm:text-6xl font-bold mb-4">Jayesh Sanjay Patil</h1>
-        <p class="text-lg sm:text-xl text-gray-600">
-          Senior ADAS Embedded Software Engineer @ Ford Motor Company
-        </p>
-      </div>
-    </section>
+    <!-- The cursor glow element -->
+    <div id="cursor-glow" class="cursor-glow"></div>
 
-    <!-- ▸ About -------------------------------------------------------- -->
-    <section id="about" class="max-w-3xl mx-auto py-16 px-6">
-      <h2 class="text-2xl font-semibold mb-4">About</h2>
-      <p>
-        Embedded systems specialist with 6+ years’ experience delivering
-        safety‑critical software for next‑generation vehicle platforms. Adept at
-        Classic & Adaptive AUTOSAR, ISO 26262, and high‑performance C/C++ on
-        Renesas, Infineon, and ARM MCU/SoCs.
-      </p>
-    </section>
+    <div class="content-wrapper">
+      <!-- ▸ Navbar ------------------------------------------------------- -->
+      <header class="fixed top-0 w-full bg-slate-900/70 backdrop-blur-md z-50">
+        <nav class="max-w-5xl mx-auto flex items-center justify-between p-4">
+          <a href="#hero" class="text-lg font-bold tracking-tight text-slate-200">Jayesh Patil</a>
+          <ul class="hidden sm:flex items-center space-x-8 text-sm font-medium text-slate-400">
+            <li><a class="hover:text-blue-400 transition-colors" href="#about">About</a></li>
+            <li><a class="hover:text-blue-400 transition-colors" href="#experience">Experience</a></li>
+            <li><a class="hover:text-blue-400 transition-colors" href="#projects">Projects</a></li>
+            <li><a class="hover:text-blue-400 transition-colors" href="#skills">Skills</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <!-- ▸ Experience --------------------------------------------------- -->
-    <section id="experience" class="bg-gray-50 py-16 px-6">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-8">Experience</h2>
-        <div class="space-y-8">
-          <div>
-            <h3 class="font-semibold">Senior ADAS Embedded Software Engineer — Ford Motor Company</h3>
-            <span class="text-sm text-gray-500">Oct 2024 – Present</span>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
-              <li>Lead 3‑member team developing Adaptive & Classic AUTOSAR components for ADAS SoCs.</li>
-              <li>Architected camera view pipeline, cutting latency 21%.</li>
-            </ul>
+      <main class="max-w-5xl mx-auto px-6">
+        <!-- ▸ Hero --------------------------------------------------------- -->
+        <section id="hero" class="min-h-screen flex flex-col items-start justify-center text-left">
+          <div class="max-w-2xl">
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-slate-100 mb-4">Jayesh Sanjay Patil</h1>
+            <h2 class="text-lg sm:text-xl text-slate-300 mb-6">
+              Senior Embedded Platform Engineer & Scrum Lead
+            </h2>
+            <p class="text-slate-400 leading-relaxed">
+              I build and lead the development of safety-critical software for the next generation of autonomous vehicles.
+            </p>
+             <div class="mt-8 flex items-center space-x-6">
+                <a href="https://www.linkedin.com/in/jayesh-sanjay-patil/" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                </a>
+                <a href="mailto:jspatil36@gmail.com" class="text-slate-400 hover:text-blue-400 transition-colors" aria-label="Email">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                </a>
+            </div>
           </div>
-          <div>
-            <h3 class="font-semibold">Embedded Platform Engineer — Ford Motor Company</h3>
-            <span class="text-sm text-gray-500">Jul 2023 – Oct 2024</span>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
-              <li>Delivered OTA‑ready diagnostics stack integrated with DoIP & secure boot.</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-semibold">Embedded System Engineer — HELLA Electronics</h3>
-            <span class="text-sm text-gray-500">Jan 2022 – Apr 2022</span>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
-              <li>Modeled charging‑domain architecture in MagicDraw/SysML and authored ICDs for CAN & SOA.</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-semibold">Body Controls Engineer — FSAE Electric</h3>
-            <span class="text-sm text-gray-500">Feb 2021 – Oct 2021</span>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
-              <li>Designed telemetry‑over‑CAN system; validated torque‑vectoring controller in MATLAB/Simulink.</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-semibold">Firmware Intern — Emdet & Futuring Group</h3>
-            <span class="text-sm text-gray-500">Jul 2018 – Mar 2019</span>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
-              <li>Developed SPI/I<sup>2</sup>C drivers on PIC16/32 for automotive sensors.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- ▸ Projects ----------------------------------------------------- -->
-    <section id="projects" class="max-w-3xl mx-auto py-16 px-6">
-      <h2 class="text-2xl font-semibold mb-8">Projects</h2>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
-          <h3 class="font-semibold">OTA Diagnostics Framework</h3>
-          <p class="text-sm text-gray-600">
-            Simulated multi‑ECU UDS stack with DoIP & secure boot on Raspberry Pi.
+        <!-- ▸ About -------------------------------------------------------- -->
+        <section id="about" class="py-24">
+          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-8">About</h2>
+          <p class="text-slate-400 leading-relaxed max-w-3xl">
+            Accomplished Senior Embedded Platform Engineer with over 6 years of experience in safety-critical ADAS and autonomous driving systems. A proven Scrum Lead with deep expertise in AUTOSAR (Classic/Adaptive), MBSE, ISO 26262, C/C++, RTOS (QNX, FreeRTOS), and MBD. Recognized for delivering significant enhancements in system performance, including a 23% faster response time and a 27% reduction in defects for Ford Motor Company in ADAS.
           </p>
-        </article>
-        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
-          <h3 class="font-semibold">Functional‑Safety Modeling</h3>
-          <p class="text-sm text-gray-600">
-            ISO 26262 ASIL decomposition & fault‑injection for Forward Collision Warning.
-          </p>
-        </article>
-        <article class="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
-          <h3 class="font-semibold">DDS Sensor‑Fusion Pipeline</h3>
-          <p class="text-sm text-gray-600">
-            C++ QoS‑tuned DDS layer reducing perception latency by 35%.
-          </p>
-        </article>
-      </div>
-    </section>
+        </section>
 
-    <!-- ▸ Skills ------------------------------------------------------- -->
-    <section id="skills" class="bg-gray-50 py-16 px-6">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Skills</h2>
-        <ul class="list-disc list-inside space-y-1 text-gray-700">
-          <li>C, Modern C++20, Python</li>
-          <li>Classic & Adaptive AUTOSAR, SOME/IP, DDS</li>
-          <li>Protocols: CAN, LIN, FlexRay, Ethernet (TSN)</li>
-          <li>Standards: ISO 26262, ASPICE, SOTIF</li>
-          <li>Tools: Git/Bitbucket, MagicDraw, Vector DaVinci, Lauterbach, IC5000</li>
-        </ul>
-      </div>
-    </section>
+        <!-- ▸ Experience --------------------------------------------------- -->
+        <section id="experience" class="py-24">
+          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-12">Experience</h2>
+          <div class="relative timeline-container max-w-3xl space-y-12">
+            
+            <div class="relative pl-10">
+               <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-700 rounded-full border-4 border-slate-900"></div>
+               <p class="text-sm text-slate-400 mb-1">Oct 2024 – Present</p>
+               <h3 class="font-semibold text-lg text-slate-200">Senior Embedded Platform Engineer & Scrum Lead — Ford Motor Company</h3>
+               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
+                  <li>Led a 9-member team developing AUTOSAR components for ADAS SoCs, ensuring ISO 26262 & ASPICE compliance.</li>
+                  <li>Architected ADAS platform functions, achieving a 23% faster response time and 21% latency reduction.</li>
+                  <li>Reduced code defects by 27% through stringent code reviews and adherence to MISRA C/C++ and ASPICE processes.</li>
+               </ul>
+            </div>
 
-    <!-- ▸ Education ---------------------------------------------------- -->
-    <section id="education" class="max-w-3xl mx-auto py-16 px-6">
-      <h2 class="text-2xl font-semibold mb-4">Education</h2>
-      <p class="text-gray-700">
-        <strong>Master of Science, Automotive Systems Engineering</strong><br />
-        University of Michigan – Dearborn, 2023
-      </p>
-    </section>
+            <div class="relative pl-10">
+               <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-700 rounded-full border-4 border-slate-900"></div>
+               <p class="text-sm text-slate-400 mb-1">May 2022 – Sep 2024</p>
+               <h3 class="font-semibold text-lg text-slate-200">Embedded Platform Engineer — Ford Motor Company</h3>
+               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
+                  <li>Developed C applications for ADAS diagnostics, settings, and perception pipelines on Classic AUTOSAR stacks.</li>
+                  <li>Enhanced platform fault handling architecture using FMEA & ISO 26262.</li>
+               </ul>
+            </div>
 
-    <!-- ▸ Web Posts ---------------------------------------------------- -->
-    <section id="web-posts" class="bg-gray-50 py-16 px-6">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-2xl font-semibold mb-4">Web Posts</h2>
-        <p class="text-gray-500 italic">Coming soon…</p>
-      </div>
-    </section>
+            <div class="relative pl-10">
+               <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-700 rounded-full border-4 border-slate-900"></div>
+               <p class="text-sm text-slate-400 mb-1">Jan 2022 – Apr 2022</p>
+               <h3 class="font-semibold text-lg text-slate-200">Embedded System Engineer — HELLA Electronics Corporation</h3>
+               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
+                  <li>Modeled system architecture for automotive charging domains using MagicDraw (SysML) and streamlined requirements management for ASPICE.</li>
+               </ul>
+            </div>
+          </div>
+        </section>
 
-    <!-- ▸ Footer ------------------------------------------------------- -->
-    <footer class="py-8 text-center text-sm text-gray-500">
-      © <span id="year"></span> Jayesh Sanjay Patil — All rights reserved
-    </footer>
+        <!-- ▸ Projects ----------------------------------------------------- -->
+        <section id="projects" class="py-24">
+          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-12">Projects</h2>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <article class="bg-slate-800/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 transition-colors">
+              <h3 class="font-semibold text-slate-200">OTA Diagnostics Framework on RPi</h3>
+              <p class="text-sm text-slate-400 mt-2">
+                Built a "mock ECU" on a Raspberry Pi 5 with a C++ UDS-over-DoIP server, SHA-256 secure-boot, and NVRAM for OTA updates.
+              </p>
+            </article>
+            <article class="bg-slate-800/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 transition-colors">
+              <h3 class="font-semibold text-slate-200">End-to-End Secure Automotive OTA</h3>
+              <p class="text-sm text-slate-400 mt-2">
+                Architected a secure OTA system on a Raspberry Pi using C++, OpenSSL, and MQTT, aligning with ISO/SAE 21434 standards.
+              </p>
+            </article>
+            <article class="bg-slate-800/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 transition-colors">
+              <h3 class="font-semibold text-slate-200">Functional Safety Modeling</h3>
+              <p class="text-sm text-slate-400 mt-2">
+                Modeled a safety-critical ADAS system with ASIL decomposition, HARA, and FTA, following ISO 26262 guidelines.
+              </p>
+            </article>
+            <article class="bg-slate-800/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 transition-colors">
+              <h3 class="font-semibold text-slate-200">ADAS Feature Development</h3>
+              <p class="text-sm text-slate-400 mt-2">
+                Developed models for Collision Mitigation Braking, Wrong-Way Driver Warning, and ACC, achieving 96% MC/DC coverage.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ▸ Skills ------------------------------------------------------- -->
+        <section id="skills" class="py-24">
+          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-12">Skills</h2>
+          <div class="max-w-3xl grid grid-cols-2 sm:grid-cols-3 gap-8">
+              <div>
+                  <h3 class="font-semibold text-slate-200 mb-3">Programming</h3>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                      <li>C / C++</li>
+                      <li>Python</li>
+                      <li>MATLAB / Simulink</li>
+                      <li>CMake / Bazel</li>
+                  </ul>
+              </div>
+               <div>
+                  <h3 class="font-semibold text-slate-200 mb-3">AUTOSAR & OS</h3>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                      <li>Classic & Adaptive</li>
+                      <li>QNX / FreeRTOS</li>
+                      <li>Linux / POSIX</li>
+                      <li>ETAS & Bosch VRTE</li>
+                  </ul>
+              </div>
+               <div>
+                  <h3 class="font-semibold text-slate-200 mb-3">Standards & Protocols</h3>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                      <li>ISO 26262 / ASPICE</li>
+                      <li>UDS / DoIP / SOME/IP</li>
+                      <li>CAN / Ethernet</li>
+                      <li>FMEA / HARA / FTA</li>
+                  </ul>
+              </div>
+          </div>
+        </section>
+        
+        <!-- ▸ Web Posts (Coming Soon) ------------------------------------ -->
+        <section id="web-posts" class="py-24 text-center">
+            <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-4">Web Posts</h2>
+            <p class="text-slate-500">New articles and project deep-dives coming soon.</p>
+        </section>
+
+      </main>
+      
+      <!-- ▸ Footer ------------------------------------------------------- -->
+      <footer class="py-8 text-center text-sm text-slate-500 border-t border-slate-800">
+        <p>© <span id="year"></span> Jayesh Sanjay Patil. All rights reserved.</p>
+      </footer>
+    </div>
+
 
     <script>
+      // Set current year in footer
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Handle the cursor glow effect
+      const cursorGlow = document.getElementById('cursor-glow');
+      document.addEventListener('mousemove', (e) => {
+        // Using requestAnimationFrame for performance
+        window.requestAnimationFrame(() => {
+            cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+      });
     </script>
   </body>
 </html>
