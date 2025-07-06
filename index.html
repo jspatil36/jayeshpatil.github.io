@@ -82,6 +82,21 @@
         transform-style: preserve-3d;
       }
 
+      /* Responsive video embed */
+      .aspect-ratio-16-9 {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      }
+
+      .aspect-ratio-16-9 iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
     </style>
   </head>
   <body class="text-slate-400 overflow-x-hidden">
@@ -177,31 +192,42 @@
         <!-- ▸ Projects -->
         <section id="projects" class="py-32">
           <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-16 reveal-on-scroll">Projects</h2>
-          <div class="grid sm:grid-cols-2 gap-8">
-            <article class="project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">OTA Diagnostics Framework on RPi</h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- MODIFIED PROJECT 1 -->
+            <a href="https://github.com/jspatil36/OTA-project-virtual-ECU/tree/main" target="_blank" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
+              <h3 class="font-semibold text-slate-200">Virtual ECU for OTA Updates</h3>
               <p class="text-sm text-slate-400 mt-2">
-                Built a "mock ECU" on a Raspberry Pi 5 with a C++ UDS-over-DoIP server, SHA-256 secure-boot, and NVRAM for OTA updates.
+                Developed a complete Over-the-Air update system on a Raspberry Pi, simulating a real-world automotive ECU with secure boot and update validation.
               </p>
-            </article>
-            <article class="project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
+            </a>
+            <!-- MODIFIED PROJECT 2 -->
+            <a href="https://github.com/jspatil36/OTA-project-acc/tree/main" target="_blank" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
+              <h3 class="font-semibold text-slate-200">End-to-End Secure Automotive OTA for ACC</h3>
+              <p class="text-sm text-slate-400 mt-2">
+                Implemented an ACC system with Stop & Go functionality using a model-based design approach, focusing on safety and real-time performance.
+              </p>
+            </a>
+            <!-- Existing Project -->
+            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
               <h3 class="font-semibold text-slate-200">End-to-End Secure Automotive OTA</h3>
               <p class="text-sm text-slate-400 mt-2">
                 Architected a secure OTA system on a Raspberry Pi using C++, OpenSSL, and MQTT, aligning with ISO/SAE 21434 standards.
               </p>
-            </article>
-            <article class="project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
+            </a>
+            <!-- Existing Project -->
+            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
               <h3 class="font-semibold text-slate-200">Functional Safety Modeling</h3>
               <p class="text-sm text-slate-400 mt-2">
                 Modeled a safety-critical ADAS system with ASIL decomposition, HARA, and FTA, following ISO 26262 guidelines.
               </p>
-            </article>
-            <article class="project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
+            </a>
+            <!-- Existing Project -->
+            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
               <h3 class="font-semibold text-slate-200">ADAS Feature Development</h3>
               <p class="text-sm text-slate-400 mt-2">
                 Developed models for Collision Mitigation Braking, Wrong-Way Driver Warning, and ACC, achieving 96% MC/DC coverage.
               </p>
-            </article>
+            </a>
           </div>
         </section>
 
@@ -248,10 +274,24 @@
           </div>
         </section>
         
-        <!-- ▸ Web Posts (Coming Soon) -->
-        <section id="web-posts" class="py-32 text-center reveal-on-scroll">
-            <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-4">Web Posts</h2>
-            <p class="text-slate-500">New articles and project deep-dives coming soon.</p>
+        <!-- ▸ Web Posts -->
+        <section id="web-posts" class="py-32 reveal-on-scroll">
+            <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-4">Project Deep-Dive</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12">
+              Here's a video demonstration of the "Virtual ECU for OTA Updates" project, showcasing the end-to-end process of securely updating software on a mock automotive ECU.
+            </p>
+            <!-- YouTube Video Embed -->
+            <div class="max-w-4xl mx-auto">
+              <div class="aspect-ratio-16-9 rounded-lg overflow-hidden shadow-2xl shadow-blue-500/20 border border-slate-800">
+                <iframe 
+                  src="https://www.youtube.com/embed/7DvEkDLob-k?si=detOFiVncU1zAh8A&amp;modestbranding=1&amp;rel=0&amp;showinfo=0" 
+                  title="Project Demo: Virtual ECU for OTA Updates" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
         </section>
       </main>
       
