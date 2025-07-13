@@ -8,21 +8,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Minimalist Neutral (White, Slate Gray, Soft Teal Accent) -->
-    <!-- Application Structure Plan: A refined single-page portfolio focusing on clarity and elegance. The structure is linear and intuitive: Hero, Achievements, Experience, Skills, Projects, Education, and Contact. The interactive chart is replaced with stat cards for a more direct visual impact. The experience and education sections now share a consistent timeline format. This minimalist approach enhances readability and presents information professionally. -->
+    <!-- Chosen Palette: Dark Space (Near Black, Slate, Bright Teal Accent) -->
+    <!-- Application Structure Plan: A dynamic and immersive single-page portfolio. A canvas-based particle animation is added to the background for a "space" effect, with interactive ripples on click/touch. The main title is restyled for emphasis. The overall theme is switched to dark mode to complement the particle effect and create a modern, tech-focused aesthetic. The core structure remains linear for intuitive navigation. -->
     <!-- Visualization & Content Choices: 
-        - Report Info: Quantifiable achievements. -> Goal: Inform. -> Viz/Method: Grid of "Stat Cards". -> Interaction: None. -> Justification: Provides a direct, scannable, and visually appealing summary of key metrics, an alternative to a chart. -> Library/Method: HTML + Tailwind CSS.
-        - Report Info: Work History & Education. -> Goal: Show career & academic progression. -> Viz/Method: Clean, static vertical timeline with added details for promotion/awards/specialization. -> Interaction: None. -> Justification: Creates a consistent and elegant flow for the user's journey. -> Library/Method: HTML + Tailwind CSS.
-        - Report Info: Skills List. -> Goal: Categorize. -> Viz/Method: Tag-style lists in bordered cards. -> Interaction: None. -> Justification: Organizes skills into digestible groups. -> Library/Method: HTML + Tailwind CSS.
-        - Report Info: Projects. -> Goal: Showcase work. -> Viz/Method: Grid of cards with external link buttons. -> Interaction: Click to navigate. -> Justification: Provides direct access to work examples. -> Library/Method: HTML + Tailwind CSS.
-        - Report Info: Contact. -> Goal: Enable action. -> Viz/Method: Labeled contact info and a download button. -> Interaction: Click to open resume link. -> Justification: Provides direct access to the full resume PDF. -> Library/Method: HTML + Tailwind CSS.
+        - Background Effect: -> Goal: Create an engaging, memorable visual experience. -> Viz/Method: Custom JavaScript canvas animation for particles. -> Interaction: Click/touch creates a ripple effect, pushing particles away. -> Justification: Adds a "wow" factor and a premium feel without distracting from the content. -> Library/Method: Custom Vanilla JS.
+        - Report Info: Quantifiable achievements. -> Goal: Inform. -> Viz/Method: Grid of "Stat Cards" adapted for a dark theme. -> Interaction: None. -> Justification: Provides a direct, scannable summary of key metrics. -> Library/Method: HTML + Tailwind CSS.
+        - Report Info: Work History & Education. -> Goal: Show progression. -> Viz/Method: Vertical timeline adapted for a dark theme. -> Interaction: None. -> Justification: Creates a consistent and elegant flow. -> Library/Method: HTML + Tailwind CSS.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
-            color: #374151;
+            background-color: #0a0a0a;
+            color: #e5e7eb;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
         .timeline-item::before {
             content: '';
@@ -31,109 +37,113 @@
             top: 8px;
             width: 10px;
             height: 10px;
-            border: 2px solid #14b8a6;
+            border: 2px solid #2dd4bf;
             border-radius: 50%;
-            background-color: #f9fafb;
+            background-color: #111827;
             z-index: 1;
         }
         .nav-link {
             transition: color 0.3s, border-bottom-color 0.3s;
         }
         .nav-link:hover, .nav-link.active {
-            color: #14b8a6;
-            border-bottom-color: #14b8a6;
+            color: #2dd4bf;
+            border-bottom-color: #2dd4bf;
+        }
+        .bg-white\/90 {
+            background-color: rgba(17, 24, 39, 0.8);
         }
     </style>
 </head>
 <body class="antialiased">
+    <canvas id="particles-canvas"></canvas>
 
-    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+    <header class="backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-semibold text-gray-800">
+            <div class="text-2xl font-semibold text-white">
                 Jayesh S. Patil
             </div>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#summary" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Summary</a>
-                <a href="#experience" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Experience</a>
-                <a href="#skills" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Skills</a>
-                <a href="#projects" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Projects</a>
-                <a href="#contact" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Contact</a>
+                <a href="#summary" class="nav-link text-gray-400 border-b-2 border-transparent pb-1">Summary</a>
+                <a href="#experience" class="nav-link text-gray-400 border-b-2 border-transparent pb-1">Experience</a>
+                <a href="#skills" class="nav-link text-gray-400 border-b-2 border-transparent pb-1">Skills</a>
+                <a href="#projects" class="nav-link text-gray-400 border-b-2 border-transparent pb-1">Projects</a>
+                <a href="#contact" class="nav-link text-gray-400 border-b-2 border-transparent pb-1">Contact</a>
             </div>
             <div class="md:hidden">
-                <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                <button id="menu-btn" class="text-gray-400 focus:outline-none">
                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <a href="#summary" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Summary</a>
-            <a href="#experience" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Experience</a>
-            <a href="#skills" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Skills</a>
-            <a href="#projects" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Projects</a>
-            <a href="#contact" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/80 border-t border-gray-800">
+            <a href="#summary" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Summary</a>
+            <a href="#experience" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Experience</a>
+            <a href="#skills" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Skills</a>
+            <a href="#projects" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Projects</a>
+            <a href="#contact" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Contact</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-16">
-        <section id="summary" class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Senior Embedded Engineer</h1>
-            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-                Architecting and developing safety-critical ADAS systems compliant with ISO 26262 and SOTIF. Expert in the full V-Cycle for AUTOSAR platforms, MBD, C/C++, and RTOS.
+        <section id="summary" class="text-center min-h-[60vh] flex flex-col justify-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-white">Jayesh Sanjay Patil</h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-400">
+                Senior Embedded Platform Engineer & Scrum Lead
             </p>
         </section>
 
         <section id="achievements" class="mt-24">
-             <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Key Career Achievements</h2>
+             <h2 class="text-3xl font-bold text-center text-white mb-16">Key Career Achievements</h2>
             <div id="achievements-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             </div>
         </section>
 
         <section id="experience" class="mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Professional Experience</h2>
-            <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-200" id="experience-timeline">
+            <h2 class="text-3xl font-bold text-center text-white mb-16">Professional Experience</h2>
+            <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-800" id="experience-timeline">
             </div>
         </section>
 
         <section id="skills" class="mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Technical Skills</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-16">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="skills-grid">
             </div>
         </section>
 
         <section id="projects" class="mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Key Projects</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-16">Key Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" id="projects-grid">
             </div>
         </section>
 
         <section id="education" class="mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Education</h2>
-             <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-200" id="education-timeline">
+            <h2 class="text-3xl font-bold text-center text-white mb-16">Education</h2>
+             <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-800" id="education-timeline">
             </div>
         </section>
 
         <section id="contact" class="mt-24 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-            <p class="max-w-2xl mx-auto text-gray-600 mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">Get In Touch</h2>
+            <p class="max-w-2xl mx-auto text-gray-400 mb-12">
                 I'm always open to discussing new opportunities and challenges in embedded systems. Feel free to reach out.
             </p>
-            <div class="max-w-md mx-auto bg-white p-8 rounded-lg border border-gray-200 space-y-6">
+            <div class="max-w-md mx-auto bg-gray-900/50 p-8 rounded-lg border border-gray-800 space-y-6">
                 <div class="flex items-center">
-                    <span class="text-teal-500 text-2xl mr-4">&#9742;</span>
-                    <a href="tel:+13132472242" class="text-lg text-gray-700 hover:text-teal-600">(313) 247-2242</a>
+                    <span class="text-teal-400 text-2xl mr-4">&#9742;</span>
+                    <a href="tel:+13132472242" class="text-lg text-gray-300 hover:text-teal-400">(313) 247-2242</a>
                 </div>
                 <div class="flex items-center">
-                    <span class="text-teal-500 text-2xl mr-4">&#9993;</span>
-                    <a href="mailto:jspatil36@gmail.com" class="text-lg text-gray-700 hover:text-teal-600">jspatil36@gmail.com</a>
+                    <span class="text-teal-400 text-2xl mr-4">&#9993;</span>
+                    <a href="mailto:jspatil36@gmail.com" class="text-lg text-gray-300 hover:text-teal-400">jspatil36@gmail.com</a>
                 </div>
                 <div class="flex items-center">
-                     <span class="text-teal-500 text-2xl mr-4">&#127760;</span>
-                    <a href="https://jspatil36.github.io" target="_blank" class="text-lg text-gray-700 hover:text-teal-600">jspatil36.github.io</a>
+                     <span class="text-teal-400 text-2xl mr-4">&#127760;</span>
+                    <a href="https://www.linkedin.com/in/jayesh-sanjay-patil/" target="_blank" class="text-lg text-gray-300 hover:text-teal-400">linkedin</a>
                 </div>
                 <div class="pt-4">
-                    <a href="https://1drv.ms/b/c/0a6ab589720d30fe/EZ6py2nTiz5EsO71-iQmNlcBZd9_R2eUp6qq6SWqUxdzUg?e=PElpVR" 
+                    <a href="https://1drv.ms/w/c/0a6ab589720d30fe/ERm1yAnujY1GldsxGQKebDEBrtvDU9QTWBg098UcR_VewQ" 
                        target="_blank"
-                       class="w-full block bg-teal-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-teal-700 transition duration-300">
+                       class="w-full block bg-teal-500 text-white font-semibold py-3 px-4 rounded-md hover:bg-teal-600 transition duration-300">
                         Download Full Resume
                     </a>
                 </div>
@@ -142,7 +152,7 @@
 
     </main>
     
-    <footer class="text-center py-10 mt-16 border-t border-gray-200">
+    <footer class="text-center py-10 mt-16 border-t border-gray-800">
         <p class="text-gray-500">&copy; 2025 Jayesh Sanjay Patil. All rights reserved.</p>
     </footer>
 
@@ -188,11 +198,11 @@
             const achievementsGrid = document.getElementById('achievements-grid');
             resumeData.achievements.forEach(achievement => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg border border-gray-200 text-center';
+                card.className = 'bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center';
                 card.innerHTML = `
-                    <p class="text-4xl font-bold text-teal-600">${achievement.value}%</p>
-                    <p class="text-md font-semibold text-gray-700 mt-2">${achievement.label}</p>
-                    <p class="text-sm text-gray-500">${achievement.description}</p>
+                    <p class="text-4xl font-bold text-teal-400">${achievement.value}%</p>
+                    <p class="text-md font-semibold text-gray-200 mt-2">${achievement.label}</p>
+                    <p class="text-sm text-gray-400">${achievement.description}</p>
                 `;
                 achievementsGrid.appendChild(card);
             });
@@ -204,12 +214,12 @@
                 
                 let detailHTML = '';
                 if (job.detail) {
-                    detailHTML = `<p class="text-sm text-gray-600 mt-3 p-3 bg-gray-50 border-l-2 border-teal-200 italic rounded-r-md">${job.detail}</p>`;
+                    detailHTML = `<p class="text-sm text-gray-400 mt-3 p-3 bg-gray-800/50 border-l-2 border-teal-800 italic rounded-r-md">${job.detail}</p>`;
                 }
 
                 item.innerHTML = `
-                    <h3 class="text-lg font-semibold text-gray-800">${job.role}</h3>
-                    <p class="font-medium text-teal-600">${job.company}</p>
+                    <h3 class="text-lg font-semibold text-white">${job.role}</h3>
+                    <p class="font-medium text-teal-400">${job.company}</p>
                     <p class="text-sm text-gray-500 mt-1">${job.period}</p>
                     ${detailHTML}
                 `;
@@ -223,12 +233,12 @@
                 
                 let specializationHTML = '';
                 if (edu.specialization) {
-                    specializationHTML = `<p class="text-sm text-gray-600 mt-3">Specialization: ${edu.specialization}</p>`;
+                    specializationHTML = `<p class="text-sm text-gray-400 mt-3">Specialization: ${edu.specialization}</p>`;
                 }
 
                 item.innerHTML = `
-                    <h3 class="text-lg font-semibold text-gray-800">${edu.degree}</h3>
-                    <p class="font-medium text-teal-600">${edu.institution}</p>
+                    <h3 class="text-lg font-semibold text-white">${edu.degree}</h3>
+                    <p class="font-medium text-teal-400">${edu.institution}</p>
                     <p class="text-sm text-gray-500 mt-1">${edu.period}</p>
                     ${specializationHTML}
                 `;
@@ -238,22 +248,22 @@
             const skillsGrid = document.getElementById('skills-grid');
             resumeData.skills.forEach(skillCat => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg border border-gray-200';
-                const skillItems = skillCat.items.map(item => `<span class="inline-block bg-gray-100 text-gray-700 text-sm font-medium mr-2 mb-2 px-3 py-1 rounded-full">${item}</span>`).join('');
-                card.innerHTML = `<h3 class="text-lg font-semibold text-gray-800 mb-4">${skillCat.category}</h3><div class="flex flex-wrap">${skillItems}</div>`;
+                card.className = 'bg-gray-900/50 p-6 rounded-lg border border-gray-800';
+                const skillItems = skillCat.items.map(item => `<span class="inline-block bg-gray-800 text-gray-300 text-sm font-medium mr-2 mb-2 px-3 py-1 rounded-full">${item}</span>`).join('');
+                card.innerHTML = `<h3 class="text-lg font-semibold text-white mb-4">${skillCat.category}</h3><div class="flex flex-wrap">${skillItems}</div>`;
                 skillsGrid.appendChild(card);
             });
 
             const projectsGrid = document.getElementById('projects-grid');
             resumeData.projects.forEach(project => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg border border-gray-200 flex flex-col';
+                card.className = 'bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col';
                 card.innerHTML = `
                     <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">${project.title}</h3>
-                        <p class="text-gray-600 mb-6">${project.description}</p>
+                        <h3 class="text-lg font-semibold text-white mb-2">${project.title}</h3>
+                        <p class="text-gray-400 mb-6">${project.description}</p>
                     </div>
-                    <a href="${project.link}" target="_blank" class="text-center mt-auto w-full border border-teal-500 text-teal-600 font-semibold py-2 px-4 rounded-md hover:bg-teal-50 hover:text-teal-700 transition duration-300">
+                    <a href="${project.link}" target="_blank" class="text-center mt-auto w-full border border-teal-500 text-teal-400 font-semibold py-2 px-4 rounded-md hover:bg-teal-500 hover:text-white transition duration-300">
                         View Project
                     </a>
                 `;
@@ -285,6 +295,109 @@
                         link.classList.add('active');
                     }
                 });
+            });
+
+            // Particle effect script
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particlesArray;
+
+            let mouse = {
+                x: null,
+                y: null,
+                radius: (canvas.height / 120) * (canvas.width / 120)
+            }
+
+            window.addEventListener('mousemove', function(event) {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+            
+            window.addEventListener('click', function(event) {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+                    ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.directionX = -this.directionX;
+                    }
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.directionY = -this.directionY;
+                    }
+
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius + this.size) {
+                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                            this.x += 5;
+                        }
+                        if (mouse.x > this.x && this.x > this.size * 10) {
+                            this.x -= 5;
+                        }
+                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                            this.y += 5;
+                        }
+                        if (mouse.y > this.y && this.y > this.size * 10) {
+                            this.y -= 5;
+                        }
+                    }
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 1) + 0.5;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .4) - 0.2;
+                    let directionY = (Math.random() * .4) - 0.2;
+                    let color = 'rgba(255, 255, 255, 0.5)';
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+            }
+            
+            init();
+            animate();
+
+            window.addEventListener('resize', function() {
+                canvas.width = innerWidth;
+                canvas.height = innerHeight;
+                mouse.radius = (canvas.height / 120) * (canvas.width / 120);
+                init();
             });
         });
     </script>
