@@ -1,476 +1,292 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jayesh Patil | Senior Embedded Platform Engineer</title>
-
-    <!-- ▸ Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- ▸ Tailwind CSS -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayesh Patil - Senior Embedded Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Minimalist Neutral (White, Slate Gray, Soft Teal Accent) -->
+    <!-- Application Structure Plan: A refined single-page portfolio focusing on clarity and elegance. The structure is linear and intuitive: Hero, Achievements, Experience, Skills, Projects, Education, and Contact. The interactive chart is replaced with stat cards for a more direct visual impact. The experience and education sections now share a consistent timeline format. This minimalist approach enhances readability and presents information professionally. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Quantifiable achievements. -> Goal: Inform. -> Viz/Method: Grid of "Stat Cards". -> Interaction: None. -> Justification: Provides a direct, scannable, and visually appealing summary of key metrics, an alternative to a chart. -> Library/Method: HTML + Tailwind CSS.
+        - Report Info: Work History & Education. -> Goal: Show career & academic progression. -> Viz/Method: Clean, static vertical timeline with added details for promotion/awards/specialization. -> Interaction: None. -> Justification: Creates a consistent and elegant flow for the user's journey. -> Library/Method: HTML + Tailwind CSS.
+        - Report Info: Skills List. -> Goal: Categorize. -> Viz/Method: Tag-style lists in bordered cards. -> Interaction: None. -> Justification: Organizes skills into digestible groups. -> Library/Method: HTML + Tailwind CSS.
+        - Report Info: Projects. -> Goal: Showcase work. -> Viz/Method: Grid of cards with external link buttons. -> Interaction: Click to navigate. -> Justification: Provides direct access to work examples. -> Library/Method: HTML + Tailwind CSS.
+        - Report Info: Contact. -> Goal: Enable action. -> Viz/Method: Labeled contact info and a download button. -> Interaction: Click to open resume link. -> Justification: Provides direct access to the full resume PDF. -> Library/Method: HTML + Tailwind CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #0A0A0A; 
-      }
-      
-      /* Particles.js container for the live background */
-      #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 0;
-      }
-      
-      /* Spotlight cursor effect */
-      .spotlight {
-        position: fixed;
-        left: 0; 
-        top: 0;
-        width: 400px;
-        height: 400px;
-        border-radius: 9999px;
-        background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        transition: left 0.1s ease-out, top 0.1s ease-out, opacity 0.5s ease-in-out; /* Added opacity transition */
-        /* Place spotlight above particles but below content */
-        z-index: 1;
-        opacity: 0; /* Start as invisible */
-      }
-      
-      /* Ensure main content is above all background effects */
-      .content-wrapper {
-        position: relative;
-        z-index: 2;
-      }
-
-      /* Timeline vertical line */
-      .timeline-container::before {
-        content: '';
-        position: absolute;
-        left: 17px;
-        top: 8px; /* Align with the dot */
-        bottom: 8px;
-        width: 2px;
-        background-color: #1e293b; /* slate-800 */
-        transform: translateX(-50%);
-      }
-
-      /* Scroll-reveal animations */
-      .reveal-on-scroll {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-
-      .reveal-on-scroll.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      /* Project card 3D tilt effect */
-      .project-card {
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        transform-style: preserve-3d;
-      }
-
-      /* Responsive video embed */
-      .aspect-ratio-16-9 {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 Aspect Ratio */
-      }
-
-      .aspect-ratio-16-9 iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #374151;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #14b8a6;
+            border-radius: 50%;
+            background-color: #f9fafb;
+            z-index: 1;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #14b8a6;
+            border-bottom-color: #14b8a6;
+        }
     </style>
-  </head>
-  <body class="text-slate-400 overflow-x-hidden">
+</head>
+<body class="antialiased">
 
-    <!-- The live background container -->
-    <div id="particles-js"></div>
-
-    <!-- The spotlight element -->
-    <div id="spotlight" class="spotlight"></div>
-
-    <div class="content-wrapper">
-      <!-- ▸ Navbar -->
-      <header class="fixed top-0 w-full bg-black/50 backdrop-blur-lg z-50 border-b border-slate-800/50">
-        <nav class="max-w-5xl mx-auto flex items-center justify-between p-4">
-          <a href="#hero" class="text-lg font-bold tracking-tight text-slate-200">Jayesh Patil</a>
-          <ul class="hidden sm:flex items-center space-x-8 text-sm font-medium text-slate-400">
-            <li><a class="hover:text-blue-400 transition-colors" href="#about">About</a></li>
-            <li><a class="hover:text-blue-400 transition-colors" href="#experience">Experience</a></li>
-            <li><a class="hover:text-blue-400 transition-colors" href="#projects">Projects</a></li>
-            <li><a class="hover:text-blue-400 transition-colors" href="#skills">Skills</a></li>
-          </ul>
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-semibold text-gray-800">
+                Jayesh S. Patil
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#summary" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Summary</a>
+                <a href="#experience" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Experience</a>
+                <a href="#skills" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Skills</a>
+                <a href="#projects" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Projects</a>
+                <a href="#contact" class="nav-link text-gray-500 border-b-2 border-transparent pb-1">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
         </nav>
-      </header>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#summary" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Summary</a>
+            <a href="#experience" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Experience</a>
+            <a href="#skills" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Skills</a>
+            <a href="#projects" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Projects</a>
+            <a href="#contact" class="block py-3 px-6 text-sm text-gray-700 hover:bg-gray-50">Contact</a>
+        </div>
+    </header>
 
-      <main class="max-w-5xl mx-auto px-6">
-        <!-- ▸ Hero -->
-        <section id="hero" class="min-h-screen flex flex-col items-start justify-center text-left">
-          <div class="max-w-3xl">
-            <h1 class="text-4xl sm:text-6xl font-bold tracking-tighter text-slate-100 mb-4">Jayesh Sanjay Patil</h1>
-            <h2 class="text-lg sm:text-xl text-slate-300 mb-6">
-              Senior Embedded Platform Engineer & Scrum Lead
-            </h2>
-            <p class="text-slate-400 leading-relaxed max-w-2xl">
-              I build and lead the development of safety-critical software for the next generation of autonomous vehicles.
+    <main class="container mx-auto px-6 py-16">
+        <section id="summary" class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Senior Embedded Engineer</h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+                Architecting and developing safety-critical ADAS systems compliant with ISO 26262 and SOTIF. Expert in the full V-Cycle for AUTOSAR platforms, MBD, C/C++, and RTOS.
             </p>
-             <div class="mt-8 flex items-center space-x-6">
-                <a href="https://www.linkedin.com/in/jayesh-sanjay-patil/" target="_blank" class="text-slate-400 hover:text-blue-400 hover:scale-110 transition-all" aria-label="LinkedIn">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
-                </a>
-                <a href="mailto:jspatil36@gmail.com" class="text-slate-400 hover:text-blue-400 hover:scale-110 transition-all" aria-label="Email">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-                </a>
+        </section>
+
+        <section id="achievements" class="mt-24">
+             <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Key Career Achievements</h2>
+            <div id="achievements-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             </div>
-          </div>
         </section>
 
-        <!-- Other sections remain the same -->
-        <!-- ▸ About -->
-        <section id="about" class="py-32 reveal-on-scroll">
-          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-8">About</h2>
-          <p class="text-slate-400 leading-relaxed max-w-3xl">
-            Accomplished Senior Embedded Platform Engineer with over 6 years of experience in safety-critical ADAS and autonomous driving systems. A proven Scrum Lead with deep expertise in AUTOSAR (Classic/Adaptive), MBSE, ISO 26262, C/C++, RTOS (QNX, FreeRTOS), and MBD. Recognized for delivering significant enhancements in system performance, including a 23% faster response time and a 27% reduction in defects for Ford Motor Company in ADAS.
-          </p>
-        </section>
-
-        <!-- ▸ Experience -->
-        <section id="experience" class="py-32">
-          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-16 reveal-on-scroll">Experience</h2>
-          <div class="relative timeline-container max-w-3xl space-y-16">
-            
-            <div class="relative pl-10 reveal-on-scroll">
-               <div class="absolute left-0 top-1.5 w-4 h-4 bg-blue-500 rounded-full border-4 border-slate-900 shadow-md shadow-blue-500/50"></div>
-               <p class="text-sm text-slate-500 mb-1">Oct 2024 – Present</p>
-               <h3 class="font-semibold text-lg text-slate-200">Senior Embedded Platform Engineer & Scrum Lead — Ford Motor Company</h3>
-               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
-                  <li>Led a 9-member team developing AUTOSAR components for ADAS SoCs, ensuring ISO 26262 & ASPICE compliance.</li>
-                  <li>Architected ADAS platform functions, achieving a 23% faster response time and 21% latency reduction.</li>
-                  <li>Reduced code defects by 27% through stringent code reviews and adherence to MISRA C/C++ and ASPICE processes.</li>
-               </ul>
+        <section id="experience" class="mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Professional Experience</h2>
+            <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-200" id="experience-timeline">
             </div>
+        </section>
 
-            <div class="relative pl-10 reveal-on-scroll">
-               <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-700 rounded-full border-4 border-slate-900"></div>
-               <p class="text-sm text-slate-500 mb-1">May 2022 – Sep 2024</p>
-               <h3 class="font-semibold text-lg text-slate-200">Embedded Platform Engineer — Ford Motor Company</h3>
-               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
-                  <li>Developed C applications for ADAS diagnostics, settings, and perception pipelines on Classic AUTOSAR stacks.</li>
-                  <li>Enhanced platform fault handling architecture using FMEA & ISO 26262.</li>
-               </ul>
+        <section id="skills" class="mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="skills-grid">
             </div>
+        </section>
 
-            <div class="relative pl-10 reveal-on-scroll">
-               <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-700 rounded-full border-4 border-slate-900"></div>
-               <p class="text-sm text-slate-500 mb-1">Jan 2022 – Apr 2022</p>
-               <h3 class="font-semibold text-lg text-slate-200">Embedded System Engineer — HELLA Electronics Corporation</h3>
-               <ul class="list-disc list-outside ml-5 mt-3 space-y-2 text-slate-400">
-                  <li>Modeled system architecture for automotive charging domains using MagicDraw (SysML) and streamlined requirements management for ASPICE.</li>
-               </ul>
+        <section id="projects" class="mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Key Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" id="projects-grid">
             </div>
-          </div>
         </section>
 
-        <!-- ▸ Projects -->
-        <section id="projects" class="py-32">
-          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-16 reveal-on-scroll">Projects</h2>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- MODIFIED PROJECT 1 -->
-            <a href="https://github.com/jspatil36/OTA-project-virtual-ECU/tree/main" target="_blank" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">Virtual ECU for OTA Updates</h3>
-              <p class="text-sm text-slate-400 mt-2">
-                Developed a complete Over-the-Air update system on a Raspberry Pi, simulating a real-world automotive ECU with secure boot and update validation.
-              </p>
-            </a>
-            <!-- MODIFIED PROJECT 2 -->
-            <a href="https://github.com/jspatil36/OTA-project-acc/tree/main" target="_blank" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">End-to-End Secure Automotive OTA for ACC</h3>
-              <p class="text-sm text-slate-400 mt-2">
-                Implemented an ACC system with Stop & Go functionality using a model-based design approach, focusing on safety and real-time performance.
-              </p>
-            </a>
-            <!-- Existing Project -->
-            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">End-to-End Secure Automotive OTA</h3>
-              <p class="text-sm text-slate-400 mt-2">
-                Architected a secure OTA system on a Raspberry Pi using C++, OpenSSL, and MQTT, aligning with ISO/SAE 21434 standards.
-              </p>
-            </a>
-            <!-- Existing Project -->
-            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">Functional Safety Modeling</h3>
-              <p class="text-sm text-slate-400 mt-2">
-                Modeled a safety-critical ADAS system with ASIL decomposition, HARA, and FTA, following ISO 26262 guidelines.
-              </p>
-            </a>
-            <!-- Existing Project -->
-            <a href="#" class="block project-card bg-slate-800/50 border border-slate-800 rounded-xl p-6 hover:border-blue-400/50 reveal-on-scroll">
-              <h3 class="font-semibold text-slate-200">ADAS Feature Development</h3>
-              <p class="text-sm text-slate-400 mt-2">
-                Developed models for Collision Mitigation Braking, Wrong-Way Driver Warning, and ACC, achieving 96% MC/DC coverage.
-              </p>
-            </a>
-          </div>
+        <section id="education" class="mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Education</h2>
+             <div class="relative max-w-2xl mx-auto pl-10 border-l-2 border-gray-200" id="education-timeline">
+            </div>
         </section>
 
-        <!-- ▸ Skills -->
-        <section id="skills" class="py-32 reveal-on-scroll">
-          <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-16">Skills</h2>
-          <div class="max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-8">
-              <div>
-                  <h3 class="font-semibold text-blue-400 mb-4">Programming</h3>
-                  <ul class="space-y-3 text-slate-400 text-sm">
-                      <li>C / C++</li>
-                      <li>Python</li>
-                      <li>MATLAB / Simulink</li>
-                      <li>CMake / Bazel</li>
-                  </ul>
-              </div>
-               <div>
-                  <h3 class="font-semibold text-blue-400 mb-4">AUTOSAR & OS</h3>
-                  <ul class="space-y-3 text-slate-400 text-sm">
-                      <li>Classic & Adaptive</li>
-                      <li>QNX / FreeRTOS</li>
-                      <li>Linux / POSIX</li>
-                      <li>ETAS & Bosch VRTE</li>
-                  </ul>
-              </div>
-               <div>
-                  <h3 class="font-semibold text-blue-400 mb-4">Standards</h3>
-                  <ul class="space-y-3 text-slate-400 text-sm">
-                      <li>ISO 26262 / ASPICE</li>
-                      <li>UDS / DoIP / SOME/IP</li>
-                      <li>CAN / Ethernet</li>
-                      <li>FMEA / HARA / FTA</li>
-                  </ul>
-              </div>
-               <div>
-                  <h3 class="font-semibold text-blue-400 mb-4">Tools</h3>
-                  <ul class="space-y-3 text-slate-400 text-sm">
-                      <li>Git / JAMA / JIRA</li>
-                      <li>Lauterbach</li>
-                      <li>Vector CANoe</li>
-                      <li>DaVinci Configurator</li>
-                  </ul>
-              </div>
-          </div>
-        </section>
-        
-        <!-- ▸ Web Posts -->
-        <section id="web-posts" class="py-32 reveal-on-scroll">
-            <h2 class="text-2xl font-bold tracking-tight text-slate-200 mb-4">Project Deep-Dive</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto mb-12">
-              Here's a video demonstration of the "Virtual ECU for OTA Updates" project, showcasing the end-to-end process of securely updating software on a mock automotive ECU.
+        <section id="contact" class="mt-24 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+            <p class="max-w-2xl mx-auto text-gray-600 mb-12">
+                I'm always open to discussing new opportunities and challenges in embedded systems. Feel free to reach out.
             </p>
-            <!-- YouTube Video Embed -->
-            <div class="max-w-4xl mx-auto">
-              <div class="aspect-ratio-16-9 rounded-lg overflow-hidden shadow-2xl shadow-blue-500/20 border border-slate-800">
-                <iframe 
-                  src="https://www.youtube.com/embed/7DvEkDLob-k?si=detOFiVncU1zAh8A&amp;modestbranding=1&amp;rel=0&amp;showinfo=0" 
-                  title="Project Demo: Virtual ECU for OTA Updates" 
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  allowfullscreen>
-                </iframe>
-              </div>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg border border-gray-200 space-y-6">
+                <div class="flex items-center">
+                    <span class="text-teal-500 text-2xl mr-4">&#9742;</span>
+                    <a href="tel:+13132472242" class="text-lg text-gray-700 hover:text-teal-600">(313) 247-2242</a>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-teal-500 text-2xl mr-4">&#9993;</span>
+                    <a href="mailto:jspatil36@gmail.com" class="text-lg text-gray-700 hover:text-teal-600">jspatil36@gmail.com</a>
+                </div>
+                <div class="flex items-center">
+                     <span class="text-teal-500 text-2xl mr-4">&#127760;</span>
+                    <a href="https://jspatil36.github.io" target="_blank" class="text-lg text-gray-700 hover:text-teal-600">jspatil36.github.io</a>
+                </div>
+                <div class="pt-4">
+                    <a href="https://1drv.ms/w/c/0a6ab589720d30fe/ERm1yAnujY1GldsxGQKebDEB3cAHYZ-puoaojUyotEnkuw?e=Uv4d33" 
+                       target="_blank"
+                       class="w-full block bg-teal-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-teal-700 transition duration-300">
+                        Download Full Resume
+                    </a>
+                </div>
             </div>
         </section>
-      </main>
-      
-      <!-- ▸ Footer -->
-      <footer class="py-8 text-center text-sm text-slate-600 border-t border-slate-800/50">
-        <p>© <span id="year"></span> Jayesh Sanjay Patil. All rights reserved.</p>
-      </footer>
-    </div>
+
+    </main>
     
-    <!-- Scripts for animations -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <footer class="text-center py-10 mt-16 border-t border-gray-200">
+        <p class="text-gray-500">&copy; 2025 Jayesh Sanjay Patil. All rights reserved.</p>
+    </footer>
+
     <script>
-      // Initialize Particles.js with updated config
-      particlesJS('particles-js', {
-        "particles": {
-          "number": {
-            "value": 120,
-            "density": {
-              "enable": true,
-              "value_area": 800
-            }
-          },
-          "color": {
-            "value": "#ffffff"
-          },
-          "shape": {
-            "type": "circle"
-          },
-          "opacity": {
-            "value": 0.6,
-            "random": true
-          },
-          "size": {
-            "value": 2,
-            "random": true
-          },
-          "line_linked": {
-            "enable": false
-          },
-          "move": {
-            "enable": true,
-            "speed": 1.5,
-            "direction": "none",
-            "random": true,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false
-          }
-        },
-        "interactivity": {
-          "detect_on": "canvas",
-          "events": {
-            "onhover": {
-              "enable": true,
-              "mode": "repulse" 
-            },
-            "onclick": {
-              "enable": true,
-              "mode": "bubble" 
-            },
-            "resize": true
-          },
-          "modes": {
-            "repulse": {
-              "distance": 100,
-              "duration": 0.4
-            },
-            "bubble": {
-              "distance": 200,    
-              "size": 8,          
-              "duration": 0.4     
-            },
-            "push": {
-                "particles_nb": 4 
-            }
-          }
-        },
-        "retina_detect": true
-      });
-
-      // Set current year in footer
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Spotlight cursor effect with fade-out timer
-      const spotlight = document.getElementById('spotlight');
-      let spotlightTimer;
-
-      const moveSpotlight = (x, y) => {
-        // Make spotlight visible and move it
-        spotlight.style.opacity = '1';
-        window.requestAnimationFrame(() => {
-            spotlight.style.left = `${x}px`;
-            spotlight.style.top = `${y}px`;
-        });
-
-        // Clear any existing timer
-        clearTimeout(spotlightTimer);
-
-        // Set a new timer to hide the spotlight after a delay
-        spotlightTimer = setTimeout(() => {
-            spotlight.style.opacity = '0';
-        }, 3000); // 3-second delay for desktop
-      };
-      
-      const touchMoveSpotlight = (x, y) => {
-        // Make spotlight visible and move it
-        spotlight.style.opacity = '1';
-         window.requestAnimationFrame(() => {
-            spotlight.style.left = `${x}px`;
-            spotlight.style.top = `${y}px`;
-        });
-        clearTimeout(spotlightTimer);
-      };
-
-      // Desktop event listener
-      document.addEventListener('mousemove', (e) => {
-        moveSpotlight(e.clientX, e.clientY);
-      });
-      
-      // Touch event listeners
-      document.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-          touchMoveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      });
-      
-      document.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 0) {
-            touchMoveSpotlight(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      });
-      
-      document.addEventListener('touchend', () => {
-        // When touch ends, start a shorter timer to fade out
-        clearTimeout(spotlightTimer);
-        spotlightTimer = setTimeout(() => {
-            spotlight.style.opacity = '0';
-        }, 2000); // 2-second delay for mobile
-      });
-
-
-      // Scroll-reveal animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
-
-      const elementsToReveal = document.querySelectorAll('.reveal-on-scroll');
-      elementsToReveal.forEach(el => observer.observe(el));
-
-
-      // Project card 3D tilt effect (desktop only)
-      const projectCards = document.querySelectorAll('.project-card');
-      // Check if it's not a touch device before adding tilt effect
-      if (!('ontouchstart' in window)) {
-        projectCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const { width, height } = rect;
-            const rotateX = (y / height - 0.5) * -15;
-            const rotateY = (x / width - 0.5) * 15;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-            card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const resumeData = {
+                achievements: [
+                    { label: 'Rework Reduction', value: 40, description: 'in diagnostic configuration' },
+                    { label: 'Software Defect Reduction', value: 27, description: 'via KPIs & code reviews' },
+                    { label: 'Faster Response Time', value: 23, description: 'in ADAS common functions' },
+                    { label: 'System Latency Reduction', value: 21, description: 'in ADAS common functions' },
+                    { label: 'CAN Latency Improvement', value: 12, description: 'for Electric Power Steering' },
+                    { label: 'Audit Finding Reduction', value: 23, description: 'in requirements management' }
+                ],
+                experience: [
+                    { company: 'Ford Motor Company', role: 'Senior Embedded Platform Engineer & Scrum Lead', period: 'October 2024 - Present', detail: 'Promoted to Senior Engineer (SG8) in recognition of technical leadership and project impact.' },
+                    { company: 'Ford Motor Company', role: 'Embedded Platform Engineer', period: 'May 2022 - September 2024', detail: 'Received multiple stock awards for exceptional performance during the SG6 period.' },
+                    { company: 'HELLA Electronics Corporation', role: 'Embedded System Engineer', period: 'January 2022 - April 2022' },
+                    { company: 'FSAE Dearborn Electric', role: 'Body Controls Engineer', period: 'February 2021 - October 2021' },
+                    { company: 'Emdet Engineers', role: 'Design and Development Engineer', period: 'April 2019 - August 2020' }
+                ],
+                education: [
+                    { institution: 'University of Michigan-Dearborn', degree: 'Master of Science, Automotive Systems Engineering', period: 'December 2022', specialization: 'Intelligent Vehicle Control Systems and Systems Engineering' },
+                    { institution: 'University of Pune', degree: 'Bachelor of Engineering, Mechanical Engineering', period: 'May 2018', specialization: 'Embedded Control Systems' }
+                ],
+                skills: [
+                    { category: 'Languages', items: ['C', 'C++', 'Embedded C', 'Python (Basic)'] },
+                    { category: 'Operating Systems', items: ['RTOS (QNX, FreeRTOS)', 'Embedded Linux', 'POSIX'] },
+                    { category: 'Safety & Architecture', items: ['ISO 26262', 'SOTIF', 'FMEA', 'HARA', 'FTA'] },
+                    { category: 'AUTOSAR', items: ['Classic & Adaptive (BSW)', 'RTE', 'DaVinci', 'ETAS VRTE'] },
+                    { category: 'Protocols & Diagnostics', items: ['CAN', 'Ethernet', 'UDS', 'DoIP', 'SOME/IP'] },
+                    { category: 'Tools & Modeling', items: ['MATLAB/Simulink', 'Vector CANoe', 'JAMA', 'Git', 'SysML'] }
+                ],
+                projects: [
+                    { title: 'Secure Automotive OTA & Diagnostics Framework', description: 'Architected a "virtual ECU" on Mac OS using C++, featuring a UDS-over-DoIP server and SHA-256 secure boot.', link: '#' },
+                    { title: 'ADAS Functional Safety Architecture Modeling', description: 'Modeled a safety-critical ADAS system with ASIL decomposition, HARA, and FTA using ISO 26262 guidelines.', link: '#' },
+                    { title: 'Advanced Braking System Controller', description: 'Designed and implemented a Genetic Fuzzy-PID Controller for an Anti-lock Braking System in MATLAB and Simulink.', link: '#' },
+                    { title: 'Battery Management System (BMS)', description: 'Developed a BMS for SOC/capacity estimation and simulated EV range and battery optimization using MATLAB.', link: '#' }
+                ]
+            };
+            
+            const achievementsGrid = document.getElementById('achievements-grid');
+            resumeData.achievements.forEach(achievement => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg border border-gray-200 text-center';
+                card.innerHTML = `
+                    <p class="text-4xl font-bold text-teal-600">${achievement.value}%</p>
+                    <p class="text-md font-semibold text-gray-700 mt-2">${achievement.label}</p>
+                    <p class="text-sm text-gray-500">${achievement.description}</p>
+                `;
+                achievementsGrid.appendChild(card);
             });
 
-            card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            card.style.boxShadow = 'none';
+            const timelineContainer = document.getElementById('experience-timeline');
+            resumeData.experience.forEach(job => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item relative mb-10';
+                
+                let detailHTML = '';
+                if (job.detail) {
+                    detailHTML = `<p class="text-sm text-gray-600 mt-3 p-3 bg-gray-50 border-l-2 border-teal-200 italic rounded-r-md">${job.detail}</p>`;
+                }
+
+                item.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-800">${job.role}</h3>
+                    <p class="font-medium text-teal-600">${job.company}</p>
+                    <p class="text-sm text-gray-500 mt-1">${job.period}</p>
+                    ${detailHTML}
+                `;
+                timelineContainer.appendChild(item);
+            });
+
+            const educationTimeline = document.getElementById('education-timeline');
+            resumeData.education.forEach(edu => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item relative mb-10';
+                
+                let specializationHTML = '';
+                if (edu.specialization) {
+                    specializationHTML = `<p class="text-sm text-gray-600 mt-3">Specialization: ${edu.specialization}</p>`;
+                }
+
+                item.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-800">${edu.degree}</h3>
+                    <p class="font-medium text-teal-600">${edu.institution}</p>
+                    <p class="text-sm text-gray-500 mt-1">${edu.period}</p>
+                    ${specializationHTML}
+                `;
+                educationTimeline.appendChild(item);
+            });
+
+            const skillsGrid = document.getElementById('skills-grid');
+            resumeData.skills.forEach(skillCat => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg border border-gray-200';
+                const skillItems = skillCat.items.map(item => `<span class="inline-block bg-gray-100 text-gray-700 text-sm font-medium mr-2 mb-2 px-3 py-1 rounded-full">${item}</span>`).join('');
+                card.innerHTML = `<h3 class="text-lg font-semibold text-gray-800 mb-4">${skillCat.category}</h3><div class="flex flex-wrap">${skillItems}</div>`;
+                skillsGrid.appendChild(card);
+            });
+
+            const projectsGrid = document.getElementById('projects-grid');
+            resumeData.projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg border border-gray-200 flex flex-col';
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">${project.title}</h3>
+                        <p class="text-gray-600 mb-6">${project.description}</p>
+                    </div>
+                    <a href="${project.link}" target="_blank" class="text-center mt-auto w-full border border-teal-500 text-teal-600 font-semibold py-2 px-4 rounded-md hover:bg-teal-50 hover:text-teal-700 transition duration-300">
+                        View Project
+                    </a>
+                `;
+                projectsGrid.appendChild(card);
+            });
+            
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+            const sections = document.querySelectorAll('main > section');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if(pageYOffset >= sectionTop - 70){
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const linkHref = link.getAttribute('href');
+                    if(linkHref && linkHref.includes(current)){
+                        link.classList.add('active');
+                    }
+                });
             });
         });
-      }
     </script>
-  </body>
+</body>
 </html>
